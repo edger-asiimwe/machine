@@ -4,8 +4,6 @@ quarters = 25
 one_dollar = 0
 five_dollar = 0
 
-
-
 def menu_message():
     #Prints the Menu message for instructions
     print('MENU FOR DEPOSITS')
