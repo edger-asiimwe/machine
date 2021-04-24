@@ -5,10 +5,12 @@ quarters = 25
 one_dollar = 0
 five_dollar = 0
 
+
 #Global variables of money in xx.xx and cents ie xx.xx * 100 to enable us call them by other functions
 #They are also updated by another function
 g_money_toPay = 0
 g_cents_toPayConverted = 0
+
 
 #Global variables of the coins inserted by the user
 #These will be updated by automatically after every user
