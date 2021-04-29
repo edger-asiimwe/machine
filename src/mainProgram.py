@@ -74,12 +74,9 @@ def testUserInput():
 #This function will be called after the machine has given out the balance
 #Afterwards, it will update the stock so that the next user views the stock thats actually available
 def updateStock(upDate_nickles, upDate_dimes, upDate_quarters, upDate_oneDollar, upDate_fiveDollar):
-    global nickels
-    global dimes
-    global quarters
-    global one_dollar
-    global five_dollar
 
+    global nickels, dimes, quarters, one_dollar, five_dollar
+    
     nickels = nickels + upDate_nickles
     dimes = dimes + upDate_dimes
     quarters = quarters + upDate_quarters
@@ -88,9 +85,8 @@ def updateStock(upDate_nickles, upDate_dimes, upDate_quarters, upDate_oneDollar,
 
 #This function updates the coin stock after the user has got his or her change
 def deductStock(upDate_nickles, upDate_dimes, upDate_quarters):
-    global nickels
-    global dimes
-    global quarters
+
+    global nickels, dimes, quarters
     
     nickels = nickels - upDate_nickles
     dimes = dimes - upDate_dimes
@@ -101,11 +97,7 @@ def deductStock(upDate_nickles, upDate_dimes, upDate_quarters):
 #Receives a value (value_toBePaid which is cents)
 def moneyUserInput(value_toBePaid):
     #Using global so that we can be able to change the global coin counter
-    global g_nickles_count
-    global g_dimes_count
-    global g_quarters_count
-    global g_ones_count
-    global g_five_count
+    global g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count
     
     #counter for coins put (denominations)
     nickles_count = 0
@@ -202,8 +194,7 @@ def main():
         inStatus, money_toPay, total_ofCents = testUserInput() 
 
         #Refrence global variables
-        global g_cents_toPayConverted 
-        global g_money_toPay 
+        global g_cents_toPayConverted, g_money_toPay 
         
         if inStatus == 'quit':
             print('Thanks for trying our servive, hope to see you soon!!\n')
