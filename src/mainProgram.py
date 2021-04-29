@@ -48,19 +48,25 @@ def stock_contains(n_value, d_value, q_value, o_value, f_value):
 #testUserInput function processes the value of the item
 #This function doesnt receive any value but returns some to the caller
 def testUserInput():
-    moneyToPay = float(input("Enter the purchase price (xx.xx) or `q' to quit: ")) #prompt the user for the money of the item/to be paid
+    money = input("Enter the purchase price (xx.xx) or `q' to quit: ") #prompt the user for the money of the item/to be paid
     status = ''
-    dollar = moneyToPay // 1 
-    cents = moneyToPay % 1
-    finalCents = round(cents,2)
-    centsToFull_digit = finalCents * 100
-    totalCents = (dollar * 100) + round(centsToFull_digit) #full cents contained in the moneyToPay variable
-    #the totalCenyts are tested to see if the satisfy the condition
-    #We use cents as whole numbers because it would be hard to implement it using a float type
-    if(totalCents % 5) == 0 and totalCents >= 0:
-        status = 'YES' #sets status to YES if it satisfies the condition
+    if money == 'q':
+        status = 'quit'
+        moneyToPay = 0
+        totalCents = 0
     else:
-        status = 'NO' #And no if it doesnt
+        moneyToPay = float(money)
+        dollar = moneyToPay // 1 
+        cents = moneyToPay % 1
+        finalCents = round(cents,2)
+        centsToFull_digit = finalCents * 100
+        totalCents = (dollar * 100) + round(centsToFull_digit) #full cents contained in the moneyToPay variable
+        #the totalCenyts are tested to see if the satisfy the condition
+        #We use cents as whole numbers because it would be hard to implement it using a float type
+        if(totalCents % 5) == 0 and totalCents >= 0:
+            status = 'YES' #sets status to YES if it satisfies the condition
+        else:
+            status = 'NO' #And no if it doesnt
     return status, moneyToPay, totalCents #Returns the status, moneytoPay as xx.xx and totalCents as a whole number
     
 
@@ -188,10 +194,10 @@ def printReceipt(n_tip, d_tip, q_tip):
     
 
 def main():
-    print('WELCOME TO THE COIN CHANGE MAKER MACHINE')
     while True:
+        print('WELCOME TO THE COIN CHANGE MAKER MACHINE')
         #We call testUserInput, it returns the values which include a YES or NO and the money
-        print('\n\nStock contains!!!')
+        print('\nStock contains!!!')
         stock_contains(nickels, dimes, quarters, one_dollar, five_dollar)
         inStatus, money_toPay, total_ofCents = testUserInput() 
 
@@ -199,31 +205,35 @@ def main():
         global g_cents_toPayConverted 
         global g_money_toPay 
         
-        if inStatus == 'YES': #inStatus contains a YES or NO showing that the money is valid
-            
-            #We assign values to the global variables listed below
-            #This is to enable us the values anywhere in any other function in the program without calling the function which gave us those values again
-            g_money_toPay = money_toPay
-            g_cents_toPayConverted = total_ofCents
-
-            menu_message() #Call of menu_message which we defined
-            balance_toGive = moneyUserInput(total_ofCents) #Call of this function returns the balance which we store in balance_toGive
-            #We shall use this value to pass it to the coin dispenser function
-            updateStock(g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count)
-            if balance_toGive == 0:
-                print('There is no change for you!!!')
-            else:
-                quartersTo, dimesTo, nicklesTo, balToManager = changeMaker(balance_toGive)
-                quartersTo, dimesTo, nicklesTo, balToManager = round(quartersTo), round(dimesTo), round(nicklesTo), round(balToManager)
-                if balToManager == 0:
-                    printReceipt(nicklesTo, dimesTo, quartersTo)
-                else:
-                    printReceipt(nicklesTo, dimesTo, quartersTo)
-                    print('\n\n')
-                    print(f'Amount due is: {balToManager // 100} dollars and {balToManager & 100} cents')
-                deductStock(nicklesTo, dimesTo, quartersTo)
+        if inStatus == 'quit':
+            print('Thanks for trying our servive, hope to see you soon!!\n')
+            pass
         else:
-            print('Illegal price, Must be a non-negative multiple of 5 cents.\n')
+            if inStatus == 'YES': #inStatus contains a YES or NO showing that the money is valid
+                
+                #We assign values to the global variables listed below
+                #This is to enable us the values anywhere in any other function in the program without calling the function which gave us those values again
+                g_money_toPay = money_toPay
+                g_cents_toPayConverted = total_ofCents
+
+                menu_message() #Call of menu_message which we defined
+                balance_toGive = moneyUserInput(total_ofCents) #Call of this function returns the balance which we store in balance_toGive
+                #We shall use this value to pass it to the coin dispenser function
+                updateStock(g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count)
+                if balance_toGive == 0:
+                    print('There is no change for you!!!')
+                else:
+                    quartersTo, dimesTo, nicklesTo, balToManager = changeMaker(balance_toGive)
+                    quartersTo, dimesTo, nicklesTo, balToManager = round(quartersTo), round(dimesTo), round(nicklesTo), round(balToManager)
+                    if balToManager == 0:
+                        printReceipt(nicklesTo, dimesTo, quartersTo)
+                    else:
+                        printReceipt(nicklesTo, dimesTo, quartersTo)
+                        print('\n\n')
+                        print(f'Amount due is: {balToManager // 100} dollars and {balToManager & 100} cents')
+                    deductStock(nicklesTo, dimesTo, quartersTo)
+            else:
+                print('Illegal price, Must be a non-negative multiple of 5 cents.\n')
         
 
 main()
