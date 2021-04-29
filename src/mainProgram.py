@@ -111,8 +111,9 @@ def moneyUserInput(value_toBePaid):
 
     cash_put = 0 #money put by the user
     strValueCent = 0 #stores a value of either a dime etc to be processed
+    bal = round(value_toBePaid)
     while cash_put < value_toBePaid:
-        print(f'Payment due:  dollars and  cents')
+        print(f'Payment due: {bal//100} dollars and {bal%100} cents')
         money = input('Indicate your deposit: ')
         if money == 'n':
             strValueCent = 5 
@@ -134,6 +135,7 @@ def moneyUserInput(value_toBePaid):
         else:
             pass
 
+        bal = bal - strValueCent   
         cash_put = cash_put + strValueCent #increments the cash put after every round of user input
 
     #Assigning the global variables new values
