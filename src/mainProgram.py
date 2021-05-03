@@ -19,9 +19,7 @@ def menu_message():
     print('f -- deposit a five dollar bill')
     print('c -- caancel the deposit')
 
-
-#Function prints the current stock value
-#Receives global variables of the coin stock as arguments
+#Function prints the current stock value, Receives global variables of the coin stock as arguments
 def stock_contains(n_value, d_value, q_value, o_value, f_value):
     #n_value will be having a value of the global stock and print it
     print(f'{n_value:>2} -- nickels')  
@@ -30,9 +28,7 @@ def stock_contains(n_value, d_value, q_value, o_value, f_value):
     print(f'{o_value:>2} -- one dollar bill')
     print(f'{f_value:>2} -- five dollar bill')
 
-
-#testUserInput function processes the value of the item
-#This function doesnt receive any value but returns some to the caller
+#testUserInput function processes the value of the item, This function doesnt receive any value but returns some to the caller
 def testUserInput():
     money = input("Enter the purchase price (xx.xx) or `q' to quit: ") #prompt the user for the money of the item/to be paid
     status = ''
@@ -49,9 +45,7 @@ def testUserInput():
             status = 'NO' #And no if it doesnt
     return status, moneyToPay, totalCents #Returns the status, moneytoPay as xx.xx and totalCents as a whole number
     
-
-#updateStock function updates the domination stock
-#This function will be called after the machine has given out the balance
+#updateStock function updates the domination stock, This function will be called after the machine has given out the balance
 #Afterwards, it will update the stock so that the next user views the stock thats actually available
 def updateStock(upDate_nickles, upDate_dimes, upDate_quarters, upDate_oneDollar, upDate_fiveDollar):
 
@@ -156,7 +150,6 @@ def printReceipt(n_tip, d_tip, q_tip):
     if n_tip > 0:
         print(f'{n_tip} -- Nickles')
     
-
 def main():
     while True:
         print('WELCOME TO THE COIN CHANGE MAKER MACHINE!!!\nStock contains!!!')
@@ -197,5 +190,4 @@ def main():
             else:
                 print('Illegal price, Must be a non-negative multiple of 5 cents.\n')
         
-
 main()
