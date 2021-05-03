@@ -1,27 +1,13 @@
 #Global variables of stock coins
-nickels = 25
-dimes = 25
-quarters = 25
-one_dollar = 0
-five_dollar = 0
-
+nickels, dimes, quarters, one_dollar, five_dollar = 25, 25, 25, 0, 0
 
 #Global variables of money in xx.xx and cents ie xx.xx * 100 to enable us call them by other functions
 #They are also updated by another function
-g_money_toPay = 0
-g_cents_toPayConverted = 0
+g_money_toPay, g_cents_toPayConverted = 0, 0
 
-
-#Global variables of the coins inserted by the user
-#These will be updated by automatically after every user
-#We use a global keyword to update it inside another function
-#Since a function cant directly change a global variable
-g_nickles_count = 0
-g_dimes_count = 0
-g_quarters_count = 0
-g_ones_count = 0
-g_five_count = 0 
-
+#Global variables of the coins inserted by the user, These will be updated by automatically after every user
+#We use a global keyword to update it inside another function, Since a function cant directly change a global variable
+g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count = 0, 0, 0, 0, 0
 
 #Print Menu function
 def menu_message():
@@ -51,16 +37,10 @@ def testUserInput():
     money = input("Enter the purchase price (xx.xx) or `q' to quit: ") #prompt the user for the money of the item/to be paid
     status = ''
     if money == 'q':
-        status = 'quit'
-        moneyToPay = 0
-        totalCents = 0
+        status, moneyToPay, totalCents = 'quit', 0, 0
     else:
         moneyToPay = float(money)
-        dollar = moneyToPay // 1 
-        cents = moneyToPay % 1
-        finalCents = round(cents,2)
-        centsToFull_digit = finalCents * 100
-        totalCents = (dollar * 100) + round(centsToFull_digit) #full cents contained in the moneyToPay variable
+        totalCents = round(moneyToPay * 100) #full cents contained in the moneyToPay variable
         #the totalCenyts are tested to see if the satisfy the condition
         #We use cents as whole numbers because it would be hard to implement it using a float type
         if(totalCents % 5) == 0 and totalCents >= 0:
@@ -92,20 +72,13 @@ def deductStock(upDate_nickles, upDate_dimes, upDate_quarters):
     dimes = dimes - upDate_dimes
     quarters = quarters - upDate_quarters
     
-
-#Function to determine the balance
-#Receives a value (value_toBePaid which is cents)
+#Function to determine the balance. Receives a value (value_toBePaid which is cents)
 def moneyUserInput(value_toBePaid):
     #Using global so that we can be able to change the global coin counter
     global g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count
     
     #counter for coins put (denominations)
-    nickles_count = 0
-    dimes_count = 0
-    quarters_count = 0
-    ones_count = 0
-    five_count= 0 
-    #counter for coins put
+    nickles_count, dimes_count, quarters_count, ones_count, five_count = 0, 0, 0, 0, 0
 
     cash_put = 0 #money put by the user
     strValueCent = 0 #stores a value of either a dime etc to be processed
@@ -143,8 +116,7 @@ def moneyUserInput(value_toBePaid):
     g_ones_count = ones_count
     g_five_count = five_count
     
-    balance = cash_put - value_toBePaid 
-    return balance
+    return cash_put - value_toBePaid
 
 #This determines the coins change to be given out depending on the limits
 def changeMaker(balToGive):
@@ -187,9 +159,8 @@ def printReceipt(n_tip, d_tip, q_tip):
 
 def main():
     while True:
-        print('WELCOME TO THE COIN CHANGE MAKER MACHINE')
+        print('WELCOME TO THE COIN CHANGE MAKER MACHINE!!\nStock contains!!!')
         #We call testUserInput, it returns the values which include a YES or NO and the money
-        print('\nStock contains!!!')
         stock_contains(nickels, dimes, quarters, one_dollar, five_dollar)
         inStatus, money_toPay, total_ofCents = testUserInput() 
 
