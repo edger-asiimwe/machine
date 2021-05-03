@@ -159,7 +159,7 @@ def printReceipt(n_tip, d_tip, q_tip):
 
 def main():
     while True:
-        print('WELCOME TO THE COIN CHANGE MAKER MACHINE!!\nStock contains!!!')
+        print('WELCOME TO THE COIN CHANGE MAKER MACHINE!!!\nStock contains!!!')
         #We call testUserInput, it returns the values which include a YES or NO and the money
         stock_contains(nickels, dimes, quarters, one_dollar, five_dollar)
         inStatus, money_toPay, total_ofCents = testUserInput() 
