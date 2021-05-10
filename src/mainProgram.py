@@ -9,8 +9,8 @@ g_money_toPay, g_cents_toPayConverted = 0, 0
 #We use a global keyword to update it inside another function, Since a function cant directly change a global variable
 g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count = 0, 0, 0, 0, 0
 
-#Print Menu function
 def menu_message():
+    '''Print Menu function'''
     print('MENU FOR DEPOSITS')
     print('n -- deposit a nickel')
     print('d -- deposit a dime')
@@ -19,17 +19,17 @@ def menu_message():
     print('f -- deposit a five dollar bill')
     print('c -- caancel the deposit')
 
-#Function prints the current stock value, Receives global variables of the coin stock as arguments
 def stock_contains(n_value, d_value, q_value, o_value, f_value):
-    #n_value will be having a value of the global stock and print it
+    '''Function prints the current stock value, Receives global variables of the coin stock as arguments
+        n_value will be having a value of the global stock and print it'''
     print(f'{n_value:>2} -- nickels')  
     print(f'{d_value:>2} -- dimes')
     print(f'{q_value:>2} -- quarter')
     print(f'{o_value:>2} -- one dollar bill')
     print(f'{f_value:>2} -- five dollar bill')
 
-#testUserInput function processes the value of the item, This function doesnt receive any value but returns some to the caller
 def testUserInput():
+    '''testUserInput function processes the value of the item, This function doesnt receive any value but returns some to the caller'''
     money = input("Enter the purchase price (xx.xx) or `q' to quit: ") #prompt the user for the money of the item/to be paid
     status = ''
     if money == 'q':
@@ -45,10 +45,9 @@ def testUserInput():
             status = 'NO' #And no if it doesnt
     return status, moneyToPay, totalCents #Returns the status, moneytoPay as xx.xx and totalCents as a whole number
     
-#updateStock function updates the domination stock, This function will be called after the machine has given out the balance
-#Afterwards, it will update the stock so that the next user views the stock thats actually available
 def updateStock(upDate_nickles, upDate_dimes, upDate_quarters, upDate_oneDollar, upDate_fiveDollar):
-
+    '''updateStock function updates the domination stock, This function will be called after the machine has given out the balance
+        Afterwards, it will update the stock so that the next user views the stock thats actually available'''
     global nickels, dimes, quarters, one_dollar, five_dollar
     
     nickels = nickels + upDate_nickles
@@ -57,18 +56,17 @@ def updateStock(upDate_nickles, upDate_dimes, upDate_quarters, upDate_oneDollar,
     one_dollar = one_dollar + upDate_oneDollar
     five_dollar = five_dollar + upDate_fiveDollar
 
-#This function updates the coin stock after the user has got his or her change
 def deductStock(upDate_nickles, upDate_dimes, upDate_quarters):
-
+    '''This function updates the coin stock after the user has got his or her change'''
     global nickels, dimes, quarters
     
     nickels = nickels - upDate_nickles
     dimes = dimes - upDate_dimes
     quarters = quarters - upDate_quarters
     
-#Function to determine the balance. Receives a value (value_toBePaid which is cents)
 def moneyUserInput(value_toBePaid):
-    #Using global so that we can be able to change the global coin counter
+    '''Function to determine the balance. Receives a value (value_toBePaid which is cents)
+        Using global so that we can be able to change the global coin counter'''
     global g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count
     
     #counter for coins put (denominations)
@@ -112,8 +110,8 @@ def moneyUserInput(value_toBePaid):
     
     return cash_put - value_toBePaid
 
-#This determines the coins change to be given out depending on the limits
 def changeMaker(balToGive):
+    '''This determines the coins change to be given out depending on the limits'''
     quartersTo, balToDimes = divmod(balToGive, 25)
     if quartersTo > quarters:
         flag = quartersTo - quarters
@@ -140,8 +138,8 @@ def changeMaker(balToGive):
 
     return quartersTo, dimesTo, nicklesTo, balToManager
 
-#This prints the receipt plus the coins to give out
 def printReceipt(n_tip, d_tip, q_tip):
+    '''This prints the receipt plus the coins to give out'''
     print('Please take the change below!!')
     if q_tip > 0:
         print(f'{q_tip} -- Quarters')
