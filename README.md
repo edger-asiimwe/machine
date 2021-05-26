@@ -6,3 +6,9 @@ Basically the problem that we’re trying to solve is – you need to write a pr
 
 ## How to Use
 Create a working folder on your computer `mkdir VendingMachine` and then then clone it.
+Open any desired text editor and view it, feel free to make any changes.
+
+Subsequently, you can make a pull request.
+
+## Technologies
+Python :snake:
