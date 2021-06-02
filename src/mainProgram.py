@@ -1,12 +1,12 @@
 #Global variables of stock coins
 nickels, dimes, quarters, one_dollar, five_dollar = 25, 25, 25, 0, 0
 
-#Global variables of money in xx.xx and cents ie xx.xx * 100 to enable us call them by other functions
-#They are also updated by another function
+'''Global variables of money in xx.xx and cents ie xx.xx * 100 to enable us call them by other functions
+They are also updated by another function'''
 g_money_toPay, g_cents_toPayConverted = 0, 0
 
-#Global variables of the coins inserted by the user, These will be updated by automatically after every user
-#We use a global keyword to update it inside another function, Since a function cant directly change a global variable
+'''Global variables of the coins inserted by the user, These will be updated by automatically after every user
+We use a global keyword to update it inside another function, Since a function cant directly change a global variable'''
 g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count = 0, 0, 0, 0, 0
 
 def menu_message():
