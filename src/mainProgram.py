@@ -30,19 +30,26 @@ def stock_contains(n_value, d_value, q_value, o_value, f_value):
 
 def testUserInput():
     '''testUserInput function processes the value of the item, This function doesnt receive any value but returns some to the caller'''
-    money = input("Enter the purchase price (xx.xx) or `q' to quit: ") #prompt the user for the money of the item/to be paid
-    status = ''
-    if money == 'q':
-        status, moneyToPay, totalCents = 'quit', 0, 0
-    else:
-        moneyToPay = float(money)
-        totalCents = round(moneyToPay * 100) #full cents contained in the moneyToPay variable
-        #the totalCenyts are tested to see if the satisfy the condition
-        #We use cents as whole numbers because it would be hard to implement it using a float type
-        if(totalCents % 5) == 0 and totalCents >= 0:
-            status = 'YES' #sets status to YES if it satisfies the condition
+    while True:
+        money = input("Enter the purchase price (xx.xx) or `q' to quit: ") #prompt the user for the money of the item/to be paid
+        if money.lower() == 'q':
+            status, moneyToPay, totalCents = 'quit', 0, 0
+            break
         else:
-            status = 'NO' #And no if it doesnt
+            try:
+                moneyToPay = float(money)
+                totalCents = round(moneyToPay * 100) #full cents contained in the moneyToPay variable
+
+                if(totalCents % 5) == 0 and totalCents >= 0: #the totalCenyts are tested to see if the satisfy the condition
+                    status = True 
+                else:
+                    status = False
+                break  
+            except:
+
+                print("Invalid value! Please enter price (xx.xx) or 'q' to quit. Thank you\n")
+                continue
+
     return status, moneyToPay, totalCents #Returns the status, moneytoPay as xx.xx and totalCents as a whole number
     
 def updateStock(upDate_nickles, upDate_dimes, upDate_quarters, upDate_oneDollar, upDate_fiveDollar):
@@ -162,7 +169,7 @@ def main():
             print('Thanks for trying our servive, hope to see you soon!!\n')
             pass
         else:
-            if inStatus == 'YES': #inStatus contains a YES or NO showing that the money is valid
+            if inStatus: #inStatus contains a YES or NO showing that the money is valid
                 
                 #We assign values to the global variables listed below
                 #This is to enable us the values anywhere in any other function in the program without calling the function which gave us those values again
