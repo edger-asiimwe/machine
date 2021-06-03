@@ -85,28 +85,31 @@ def moneyUserInput(value_toBePaid):
     while cash_put < value_toBePaid:
         print(f'Payment due: {bal//100} dollars and {bal%100} cents')
         money = input('Indicate your deposit: ')
-        if money == 'n':
-            strValueCent = 5 
-            nickles_count += 1 #increments the coin counter for the denomination, this applies for the other denominations
-        elif money == 'd':
-            strValueCent = 10
-            dimes_count += 1
-        elif money == 'q':
-            strValueCent = 25
-            quarters_count += 1
-        elif money == 'o':
-            strValueCent = 100
-            ones_count += 1
-        elif money == 'f':
-            strValueCent = 500
-            five_count += 1
-        elif money == 'c':
-            break
+        if money in ['n', 'd', 'q', 'o', 'f', 'c']:
+            if money == 'n':
+                strValueCent = 5 
+                nickles_count += 1 #increments the coin counter for the denomination, this applies for the other denominations
+            elif money == 'd':
+                strValueCent = 10
+                dimes_count += 1
+            elif money == 'q':
+                strValueCent = 25
+                quarters_count += 1
+            elif money == 'o':
+                strValueCent = 100
+                ones_count += 1
+            elif money == 'f':
+                strValueCent = 500
+                five_count += 1
+            elif money == 'c':
+                break
+            else:
+                pass
+            bal = bal - strValueCent   
+            cash_put = cash_put + strValueCent 
         else:
-            pass
+            print('Please enter the letters shown above!')
 
-        bal = bal - strValueCent   
-        cash_put = cash_put + strValueCent #increments the cash put after every round of user input
 
     #Assigning the global variables new values
     g_nickles_count = nickles_count
