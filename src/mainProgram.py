@@ -1,3 +1,5 @@
+from printables import printables
+
 #Global variables of stock coins
 nickels, dimes, quarters, one_dollar, five_dollar = 25, 25, 25, 0, 0
 
@@ -9,24 +11,7 @@ g_money_toPay, g_cents_toPayConverted = 0, 0
 We use a global keyword to update it inside another function, Since a function cant directly change a global variable'''
 g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count = 0, 0, 0, 0, 0
 
-def menu_message():
-    '''Print Menu function'''
-    print('MENU FOR DEPOSITS')
-    print('n -- deposit a nickel')
-    print('d -- deposit a dime')
-    print('q -- deposit a quarter')
-    print('o -- deposit a one dollar bill')
-    print('f -- deposit a five dollar bill')
-    print('c -- caancel the deposit')
 
-def stock_contains(n_value, d_value, q_value, o_value, f_value):
-    '''Function prints the current stock value, Receives global variables of the coin stock as arguments
-        n_value will be having a value of the global stock and print it'''
-    print(f'{n_value:>2} -- nickels')  
-    print(f'{d_value:>2} -- dimes')
-    print(f'{q_value:>2} -- quarter')
-    print(f'{o_value:>2} -- one dollar bill')
-    print(f'{f_value:>2} -- five dollar bill')
 
 def testUserInput():
     '''testUserInput function processes the value of the item, This function doesnt receive any value but returns some to the caller'''
@@ -148,21 +133,14 @@ def changeMaker(balToGive):
 
     return quartersTo, dimesTo, nicklesTo, balToManager
 
-def printReceipt(n_tip, d_tip, q_tip):
-    '''This prints the receipt plus the coins to give out'''
-    print('Please take the change below!!')
-    if q_tip > 0:
-        print(f'{q_tip} -- Quarters')
-    if d_tip > 0:
-        print(f'{d_tip} -- Dimes')
-    if n_tip > 0:
-        print(f'{n_tip} -- Nickles')
+
     
 def main():
     while True:
         print('WELCOME TO THE COIN CHANGE MAKER MACHINE!!!\nStock contains!!!')
+        screen = printables()
+        screen.stock_contains(nickels, dimes, quarters, one_dollar, five_dollar)
         #We call testUserInput, it returns the values which include a YES or NO and the money
-        stock_contains(nickels, dimes, quarters, one_dollar, five_dollar)
         inStatus, money_toPay, total_ofCents = testUserInput() 
 
         #Refrence global variables
@@ -179,7 +157,7 @@ def main():
                 g_money_toPay = money_toPay
                 g_cents_toPayConverted = total_ofCents
 
-                menu_message() #Call of menu_message which we defined
+                screen.menu_message() #Call of menu_message which we defined
                 balance_toGive = moneyUserInput(total_ofCents) #Call of this function returns the balance which we store in balance_toGive
                 #We shall use this value to pass it to the coin dispenser function
                 updateStock(g_nickles_count, g_dimes_count, g_quarters_count, g_ones_count, g_five_count)
@@ -189,9 +167,9 @@ def main():
                     quartersTo, dimesTo, nicklesTo, balToManager = changeMaker(balance_toGive)
                     quartersTo, dimesTo, nicklesTo, balToManager = round(quartersTo), round(dimesTo), round(nicklesTo), round(balToManager)
                     if balToManager == 0:
-                        printReceipt(nicklesTo, dimesTo, quartersTo)
+                        screen.printReceipt(nicklesTo, dimesTo, quartersTo)
                     else:
-                        printReceipt(nicklesTo, dimesTo, quartersTo)
+                        screen.printReceipt(nicklesTo, dimesTo, quartersTo)
                         print('\n\n')
                         print(f'Amount due is: {balToManager // 100} dollars and {balToManager & 100} cents')
                     deductStock(nicklesTo, dimesTo, quartersTo)
