@@ -1,4 +1,4 @@
-# Vending Machine Conin Change Program
+# Vending Machine Coin Change Program
 
 ## Introduction
 The Vending Machine coin change program is a well known problem which simulates the real change maker in the day-to-day vending machine. 
